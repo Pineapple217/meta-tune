@@ -32,5 +32,12 @@ async fn root_get() -> &'static str {
 async fn get_track(Path(id): Path<String>, State(spotify): State<ClientCredsSpotify>) -> String {
     let track_uri = TrackId::from_id(&id).unwrap();
     let track = spotify.track(track_uri).await.unwrap();
-    format!("{} by {}", track.name, track.artists[0].name)
+    let artist = spotify
+        .artist(track.artists[0].id.as_ref().unwrap().as_ref())
+        .await
+        .unwrap();
+    format!(
+        "{} by {}\ngenre: {:?}",
+        track.name, track.artists[0].name, artist.genres
+    )
 }
