@@ -24,11 +24,13 @@
       <div v-scope class="p-10 w-full max-w-4xl">
         <input
           type="search"
-          class="text-lg rounded-full p-4 w-full text-black focus:border-gray-600"
+          class="text-lg rounded-full p-4 pl-7 w-full text-black focus:border-gray-600"
           placeholder="Enter id"
           v-on:keyup.enter="onEnter"
           v-model="track_id" />
-        <p class="text-lg p-3">{{ name }}</p>
+        <p class="text-lg p-3">
+          {{ track.name }} by {{ track.artists[0].name }}
+        </p>
       </div>
     </div>
     <!-- <div v-scope>
