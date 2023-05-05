@@ -5,7 +5,9 @@ use axum::{
     routing::get,
     Json, Router, Server,
 };
-// use log::info;
+use dotenv::dotenv;
+use env_logger::Env;
+use log::{debug, error, info, trace, warn};
 use rspotify::{
     model::{FullTrack, TrackId},
     prelude::*,
@@ -19,11 +21,15 @@ struct AppState {
 
 #[tokio::main]
 async fn main() {
+    #[cfg(debug_assertions)]
+    dotenv().ok();
+
+    let env = Env::default().filter_or("LOG_LEVEL", "warn");
+    env_logger::init_from_env(env);
+
     let creds = Credentials::from_env().unwrap();
     let spotify = ClientCredsSpotify::new(creds);
-    println!("Getting spotify token...");
     spotify.request_token().await.unwrap();
-    println!("Token optained.");
     let app_state = AppState { spotify: spotify };
 
     let router = Router::new()
@@ -35,8 +41,7 @@ async fn main() {
 
     let server = Server::bind(&"0.0.0.0:8080".parse().unwrap()).serve(router.into_make_service());
     let addr = server.local_addr();
-    println!("Listening on {addr}");
-    // info!("Listening on {addr}");
+    info!("Listening on {addr}");
 
     server.await.unwrap();
 }
