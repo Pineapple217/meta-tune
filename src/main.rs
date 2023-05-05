@@ -75,7 +75,7 @@ async fn indexcss_get() -> impl IntoResponse {
 
 async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>) -> Json<FullTrack> {
     let spotify = app_state.spotify;
-    let track_uri = TrackId::from_id(&id).unwrap();
+    let track_uri = TrackId::from_id_or_uri(&id).unwrap();
     let track = spotify.track(track_uri).await.unwrap();
     let artist = spotify
         .artist(track.artists[0].id.as_ref().unwrap().as_ref())

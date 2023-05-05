@@ -4,11 +4,38 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap"
+      rel="stylesheet" />
     <link type="text/css" rel="stylesheet" href="/index.css" />
     <title>Meta-Tune</title>
+    <script type="module" src="/index.js"></script>
   </head>
+
   <body>
-    this is a test
+    <div class="flex flex-col h-screen items-center">
+      <hgroup class="p-5">
+        <h1 class="text-5xl text-center">Meta-Tune</h1>
+        <h2 class="text-2xl text-center">
+          Getting the data that Spotify doesn't want you to know
+        </h2>
+      </hgroup>
+      <div v-scope class="p-10 w-full max-w-4xl">
+        <input
+          type="search"
+          class="text-lg rounded-full p-4 w-full text-black focus:border-gray-600"
+          placeholder="Enter id"
+          v-on:keyup.enter="onEnter"
+          v-model="track_id" />
+        <p class="text-lg p-3">{{ name }}</p>
+      </div>
+    </div>
+    <!-- <div v-scope>
+      in
+      <p>{{ count }}</p>
+      <p>{{ plusOne }}</p>
+      <button @click="increment">increment</button>
+    </div> -->
   </body>
-  <script type="module" src="/index.mjs"></script>
 </html>
