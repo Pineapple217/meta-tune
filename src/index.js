@@ -12,7 +12,7 @@ https://github.com/Pineapple217/Muze-Site
 import { createApp } from "https://unpkg.com/petite-vue@0.2.2/dist/petite-vue.es.js";
 
 createApp({
-  track_identifier: "aaaaaaa",
+  track_identifier: "0rZjIUqYHZeXKC1nRwYX26",
   track: null,
 
   async getTrack() {
