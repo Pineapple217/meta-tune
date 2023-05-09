@@ -15,7 +15,8 @@ createApp({
   track_id: "",
   track: null,
 
-  async onEnter() {
+  async getTrack() {
+    if (!this.track_id) return;
     let respone = await fetch(`./api/track/${this.track_id}`);
     let track_json = await respone.json();
     this.track = track_json;
