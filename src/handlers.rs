@@ -41,7 +41,7 @@ pub async fn get_track(
     State(app_state): State<AppState>,
 ) -> Json<FullTrack> {
     let spotify = app_state.spotify;
-    let track_uri = TrackId::from_id_or_uri(&id).unwrap();
+    let track_uri = TrackId::from_id(&id).unwrap();
     let track = spotify.track(track_uri).await.unwrap();
     let _artist = spotify
         .artist(track.artists[0].id.as_ref().unwrap().as_ref())

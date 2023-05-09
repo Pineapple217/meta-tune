@@ -27,7 +27,7 @@
           class="text-lg font-semibold rounded-full p-4 pl-7 w-full text-black focus:border-gray-600"
           placeholder="Enter id"
           v-on:keyup.enter="getTrack"
-          v-model="track_id" />
+          v-model="track_identifier" />
         <div v-if="track !== null">
           <p class="text-lg p-3">
             {{ track.name }} by {{ track.artists[0].name }}
