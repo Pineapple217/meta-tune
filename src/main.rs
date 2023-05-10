@@ -38,5 +38,15 @@ async fn main() {
     let addr = server.local_addr();
     info!("Listening on {addr}");
 
-    server.await.unwrap();
+    server
+        .with_graceful_shutdown(signal_shutdown())
+        .await
+        .unwrap();
+}
+
+async fn signal_shutdown() {
+    tokio::signal::ctrl_c()
+        .await
+        .expect("expect tokio signal ctrl-c");
+    info!("signal shutdown");
 }
