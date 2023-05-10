@@ -1,7 +1,7 @@
 use axum::{
     extract::{Path, State},
-    http::Response,
-    response::{Html, IntoResponse},
+    http::StatusCode,
+    response::{Html, IntoResponse, Response},
     Json,
 };
 // use log::{debug, error, info, trace, warn};
@@ -36,16 +36,18 @@ pub async fn indexcss_get() -> impl IntoResponse {
         .unwrap()
 }
 
-pub async fn get_track(
-    Path(id): Path<String>,
-    State(app_state): State<AppState>,
-) -> Json<FullTrack> {
+pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>) -> Response {
     let spotify = app_state.spotify;
-    let track_uri = TrackId::from_id(&id).unwrap();
-    let track = spotify.track(track_uri).await.unwrap();
-    let _artist = spotify
-        .artist(track.artists[0].id.as_ref().unwrap().as_ref())
-        .await
-        .unwrap();
-    Json(track)
+
+    let Ok(track_id) = TrackId::from_id(&id) else {
+        return StatusCode::BAD_REQUEST.into_response();
+    };
+    let Ok(track) = spotify.track(track_id).await else {
+        return StatusCode::NOT_FOUND.into_response();
+    };
+    // let _artist = spotify
+    //     .artist(track.artists[0].id.as_ref().unwrap().as_ref())
+    //     .await
+    //     .unwrap();
+    Json(track).into_response()
 }

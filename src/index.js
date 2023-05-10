@@ -16,19 +16,32 @@ createApp({
   track: null,
 
   async getTrack() {
-    if (!this.track_identifier) return;
     const track_id = extractTrackId(this.track_identifier);
-    let respone = await fetch(`./api/track/${track_id}`);
-    let track_json = await respone.json();
-    this.track = track_json;
+    if (!track_id) return;
+    try {
+      let respone = await fetch(`./api/track/${track_id}`);
+      let track_json = await respone.json();
+      this.track = track_json;
+    } catch (err) {}
   },
 }).mount();
 
 function extractTrackId(urlOrId) {
   const urlPattern = /\/track\/([a-zA-Z0-9]+)/;
+
   const urlMatch = urlPattern.exec(urlOrId);
   if (urlMatch && urlMatch.length >= 2) {
-    return urlMatch[1];
+    const trackId = urlMatch[1];
+    if (trackId.length === 22) {
+      return trackId;
+    } else {
+      return null;
+    }
   }
-  return urlOrId;
+
+  if (urlOrId.length === 22) {
+    return urlOrId;
+  } else {
+    return null;
+  }
 }
