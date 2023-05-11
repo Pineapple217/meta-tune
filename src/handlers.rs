@@ -45,8 +45,14 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
     let Ok(track) = spotify.track(track_id).await else {
         return StatusCode::NOT_FOUND.into_response();
     };
-    let artist = spotify
-        .artist(track.artists[0].id.as_ref().unwrap().as_ref())
+    let artists = spotify
+        .artists(
+            track
+                .artists
+                .clone()
+                .into_iter()
+                .map(|artist| artist.id.unwrap()),
+        )
         .await
         .unwrap();
     let track_send = TrackSend {
@@ -58,7 +64,11 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
             .collect(),
         duration: track.duration.num_seconds() as i32,
         popularity: track.popularity,
-        genres: artist.genres,
+        genres: artists
+            .into_iter()
+            .map(|art| art.genres)
+            .flatten()
+            .collect(),
     };
     Json(track_send).into_response()
 }
