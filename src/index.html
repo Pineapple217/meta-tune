@@ -15,18 +15,16 @@
 
   <body>
     <div id="main">
-        <hgroup id="header">
-          <h1>Meta-Tune</h1>
-          <h2>
-            Getting the data that Spotify doesn't want you to know
-          </h2>
-        </hgroup>
+      <hgroup id="header">
+        <h1>Meta-Tune</h1>
+        <h2>Getting the data that Spotify doesn't want you to know</h2>
+      </hgroup>
       <div v-scope id="search">
         <input
           type="search"
           placeholder="Enter id"
           v-on:keyup.enter="getTrack"
-          v-model="track_identifier"/>
+          v-model="track_identifier" />
 
         <div v-if="track !== null" id="track-info">
           <hgroup>
@@ -46,11 +44,14 @@
             <p>Popularity</p>
             <p>{{ track.popularity }}</p>
 
-            <p v-if="track.genres.len > 0">Genre(s)</p>
-            <p v-if="track.genres > 0"><span v-for="(genre, index) in track.genres"
+            <p v-if="track.genres.length > 0">Genre(s)</p>
+            <p v-if="track.genres.length > 0">
+              <span v-for="(genre, index) in track.genres"
                 >{{ genre }}<span v-if="index !== track.genres.length - 1"
                   >,
-                </span></span</p>
+                </span></span
+              >
+            </p>
           </div>
         </div>
       </div>
