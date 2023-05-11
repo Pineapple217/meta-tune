@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap"
       rel="stylesheet" />
@@ -14,24 +14,44 @@
   </head>
 
   <body>
-    <div class="flex flex-col h-screen items-center">
-      <hgroup class="p-5">
-        <h1 class="text-5xl text-center">Meta-Tune</h1>
-        <h2 class="text-2xl text-center">
-          Getting the data that Spotify doesn't want you to know
-        </h2>
-      </hgroup>
-      <div v-scope class="p-10 w-full max-w-4xl">
+    <div id="main">
+        <hgroup id="header">
+          <h1>Meta-Tune</h1>
+          <h2>
+            Getting the data that Spotify doesn't want you to know
+          </h2>
+        </hgroup>
+      <div v-scope id="search">
         <input
           type="search"
-          class="text-lg font-semibold rounded-full p-4 pl-7 w-full text-black focus:border-gray-600"
           placeholder="Enter id"
           v-on:keyup.enter="getTrack"
-          v-model="track_identifier" />
-        <div v-if="track !== null">
-          <p class="text-lg p-3">
-            {{ track.name }} by {{ track.artists[0].name }}
-          </p>
+          v-model="track_identifier"/>
+
+        <div v-if="track !== null" id="track-info">
+          <hgroup>
+            <h1>{{ track.name }}</h1>
+            <h3>
+              <span v-for="(artist, index) in track.artists"
+                >{{ artist }}<span v-if="index !== track.artists.length - 1"
+                  >,
+                </span></span
+              >
+            </h3>
+          </hgroup>
+          <div id="info-list">
+            <p>Duration</p>
+            <p>{{ track.duration/60>>0 }}:{{ track.duration%60}}</p>
+
+            <p>Popularity</p>
+            <p>{{ track.popularity }}</p>
+
+            <p v-if="track.genres.len > 0">Genre(s)</p>
+            <p v-if="track.genres > 0"><span v-for="(genre, index) in track.genres"
+                >{{ genre }}<span v-if="index !== track.genres.length - 1"
+                  >,
+                </span></span</p>
+          </div>
         </div>
       </div>
     </div>

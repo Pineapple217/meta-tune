@@ -10,7 +10,7 @@ use rspotify::{
     prelude::*,
 };
 
-use crate::models::AppState;
+use crate::models::{AppState, TrackSend};
 
 pub async fn root_get() -> impl IntoResponse {
     let markup = tokio::fs::read_to_string("src/index.html").await.unwrap();
@@ -45,9 +45,20 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
     let Ok(track) = spotify.track(track_id).await else {
         return StatusCode::NOT_FOUND.into_response();
     };
-    // let _artist = spotify
-    //     .artist(track.artists[0].id.as_ref().unwrap().as_ref())
-    //     .await
-    //     .unwrap();
-    Json(track).into_response()
+    let artist = spotify
+        .artist(track.artists[0].id.as_ref().unwrap().as_ref())
+        .await
+        .unwrap();
+    let track_send = TrackSend {
+        name: track.name,
+        artists: track
+            .artists
+            .into_iter()
+            .map(|artist| artist.name)
+            .collect(),
+        duration: track.duration.num_seconds() as i32,
+        popularity: track.popularity,
+        genres: artist.genres,
+    };
+    Json(track_send).into_response()
 }

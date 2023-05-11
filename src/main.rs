@@ -25,6 +25,7 @@ async fn main() {
     let creds = Credentials::from_env().unwrap();
     let spotify = ClientCredsSpotify::new(creds);
     spotify.request_token().await.unwrap();
+
     let app_state = AppState { spotify: spotify };
 
     let router = Router::new()
