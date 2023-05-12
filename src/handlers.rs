@@ -5,6 +5,7 @@ use axum::{
     Json,
 };
 // use log::{debug, error, info, trace, warn};
+use itertools::Itertools;
 use rspotify::{
     model::{FullTrack, TrackId},
     prelude::*,
@@ -68,7 +69,8 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
             .into_iter()
             .map(|art| art.genres)
             .flatten()
-            .collect(),
+            .unique()
+            .collect::<Vec<String>>(),
     };
     Json(track_send).into_response()
 }

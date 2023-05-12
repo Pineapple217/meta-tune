@@ -1,8 +1,10 @@
 mod handlers;
 mod models;
 
-use axum::{routing::get, Router, Server};
+#[cfg(debug_assertions)]
 use dotenv::dotenv;
+
+use axum::{routing::get, Router, Server};
 use env_logger::Env;
 use log::info;
 // use log::{debug, error, info, trace, warn};

@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap"
       rel="stylesheet" />
@@ -29,13 +28,7 @@
         <div v-if="track !== null" id="track-info">
           <hgroup>
             <h1>{{ track.name }}</h1>
-            <h3>
-              <span v-for="(artist, index) in track.artists"
-                >{{ artist }}<span v-if="index !== track.artists.length - 1"
-                  >,
-                </span></span
-              >
-            </h3>
+            <h3>{{ track.artists.join(', ') }}</h3>
           </hgroup>
           <div id="info-list">
             <p>Duration</p>
@@ -45,13 +38,7 @@
             <p>{{ track.popularity }}</p>
 
             <p v-if="track.genres.length > 0">Genre(s)</p>
-            <p v-if="track.genres.length > 0">
-              <span v-for="(genre, index) in track.genres"
-                >{{ genre }}<span v-if="index !== track.genres.length - 1"
-                  >,
-                </span></span
-              >
-            </p>
+            <p v-if="track.genres.length > 0">{{ track.genres.join(', ') }}</p>
           </div>
         </div>
       </div>
