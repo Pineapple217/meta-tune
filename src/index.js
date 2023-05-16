@@ -15,7 +15,8 @@ createApp({
   track_identifier: "0rZjIUqYHZeXKC1nRwYX26",
   track: null,
 
-  async getTrack() {
+  async getTrack(e) {
+    e.target.blur(); // hide keyboard for mobile
     const track_id = extractTrackId(this.track_identifier);
     if (!track_id) return;
     try {
