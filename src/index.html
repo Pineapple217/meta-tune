@@ -7,6 +7,9 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap"
       rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link type="text/css" rel="stylesheet" href="/index.css" />
     <title>Meta-Tune</title>
     <script type="module" src="/index.js"></script>
@@ -27,7 +30,15 @@
 
         <div v-if="track !== null" id="track-info">
           <hgroup>
-            <img :src="track.images[1].url" alt="cover art" />
+            <div class="cover-art">
+              <img :src="track.images[1].url" alt="cover art" />
+              <a
+                :href="track.images[0].url"
+                target="_blank"
+                class="material-symbols-outlined">
+                open_in_new
+              </a>
+            </div>
             <h1>{{ track.name }}</h1>
             <h3>{{ track.artists.join(', ') }}</h3>
           </hgroup>

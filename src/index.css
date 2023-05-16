@@ -135,6 +135,18 @@ body {
   margin: 1.25rem;
 }
 
+.cover-art {
+  display: flex;
+
+  & a {
+    text-decoration: none;
+    color: var(--color);
+    align-self: flex-end;
+    margin-bottom: -3px;
+    margin-left: 2px;
+  }
+}
+
 #info-list {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   display: grid;
