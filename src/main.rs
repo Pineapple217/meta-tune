@@ -11,6 +11,7 @@ use log::info;
 use rspotify::{
     // prelude::*,
     ClientCredsSpotify,
+    Config,
     Credentials,
 };
 
@@ -25,7 +26,11 @@ async fn main() {
     env_logger::init_from_env(env);
 
     let creds = Credentials::from_env().unwrap();
-    let spotify = ClientCredsSpotify::new(creds);
+    let conf = Config {
+        token_refreshing: true,
+        ..Default::default()
+    };
+    let spotify = ClientCredsSpotify::with_config(creds, conf);
     spotify.request_token().await.unwrap();
 
     let app_state = AppState { spotify: spotify };
