@@ -6,10 +6,7 @@ use axum::{
 };
 // use log::{debug, error, info, trace, warn};
 use itertools::Itertools;
-use rspotify::{
-    model::{FullTrack, TrackId},
-    prelude::*,
-};
+use rspotify::{model::TrackId, prelude::*};
 
 use crate::models::{AppState, TrackSend};
 
@@ -71,6 +68,7 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
             .flatten()
             .unique()
             .collect::<Vec<String>>(),
+        images: track.album.images,
     };
     Json(track_send).into_response()
 }

@@ -7,7 +7,7 @@ console.log(`
 ⠀⠀⠀⠙⢿⣷⣶⣶⡿⠁⠀⠈⣿⣿⠟⠀⣿⣿⠇⠀⠈⠻⣿⣶⣾⡿⠋⠀⠀
 
 Check the repo:
-https://github.com/Pineapple217/Muze-Site
+https://github.com/Pineapple217/meta-tune
 `);
 import { createApp } from "https://unpkg.com/petite-vue@0.2.2/dist/petite-vue.es.js";
 
@@ -22,6 +22,7 @@ createApp({
       let respone = await fetch(`./api/track/${track_id}`);
       let track_json = await respone.json();
       this.track = track_json;
+      console.log(track_json);
     } catch (err) {}
   },
 }).mount();

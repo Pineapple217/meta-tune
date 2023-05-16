@@ -1,3 +1,9 @@
+:root {
+  --color: #f4f4f5;
+  --bg-color: #131314;
+
+}
+
 blockquote,
 dl,
 dd,
@@ -41,6 +47,7 @@ embed,
 object {
   display: block;
 }
+
 img,
 video {
   max-width: 100%;
@@ -57,8 +64,8 @@ video {
 
 body {
   font-family: "Quicksand", sans-serif;
-  background-color: #131314;
-  color: #f4f4f5;
+  background-color: var(--bg-color);
+  color: var(--color);
   margin: 0;
   line-height: inherit;
 }
@@ -73,6 +80,7 @@ body {
 #header {
   padding: 1.25rem;
 }
+
 #header h1 {
   font-size: 3rem;
   line-height: 1;
@@ -92,7 +100,7 @@ body {
 }
 
 #search input {
-  color: black;
+  color: var(--bg-color);
   font-size: 1.125rem;
   line-height: 1.75rem;
   padding: 1rem;
@@ -112,7 +120,7 @@ body {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000),
     var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
   background-color: rgb(23 23 23);
-  border-color: rgb(229 231 235);
+  border-color: var(--color);
   border-width: 1px;
   border-radius: 0.375rem;
   margin-top: 1.25rem;
@@ -126,8 +134,34 @@ body {
 #track-info hgroup {
   margin: 1.25rem;
 }
+
 #info-list {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   display: grid;
   margin: 1rem;
+}
+
+.progress {
+  width: 100%;
+  height: 0.85rem;
+
+}
+
+.progress-wrap {
+  margin-top: 3px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 1000px;
+  border: solid var(--color) 1px;
+
+}
+
+.progress-bar {
+  background-color: var(--color);
+  border: var(--color);
+  left: 0;
+  position: absolute;
+  top: 0;
+  border-radius: -1000px;
+  transition: all 0.3s;
 }

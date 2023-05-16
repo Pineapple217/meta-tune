@@ -27,15 +27,25 @@
 
         <div v-if="track !== null" id="track-info">
           <hgroup>
+            <img :src="track.images[1].url" alt="cover art" />
             <h1>{{ track.name }}</h1>
             <h3>{{ track.artists.join(', ') }}</h3>
           </hgroup>
           <div id="info-list">
             <p>Duration</p>
-            <p>{{ track.duration/60>>0 }}:{{ track.duration%60}}</p>
+            <p>
+              {{ track.duration/60>>0 }}:{{
+              String(track.duration%60).padStart(2, '0') }}
+            </p>
 
             <p>Popularity</p>
-            <p>{{ track.popularity }}</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.popularity + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.popularity) + '%'}"></div>
+            </div>
 
             <p v-if="track.genres.length > 0">Genre(s)</p>
             <p v-if="track.genres.length > 0">{{ track.genres.join(', ') }}</p>
