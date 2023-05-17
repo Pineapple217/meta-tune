@@ -136,14 +136,15 @@ body {
 
 .cover-art {
   display: flex;
+}
 
-  & a {
-    text-decoration: none;
-    color: var(--color);
-    align-self: flex-end;
-    margin-bottom: -3px;
-    margin-left: 2px;
-  }
+.cover-art a {
+  text-decoration: none;
+  color: var(--color);
+  align-self: flex-end;
+  margin-bottom: -3px;
+  margin-left: 2px;
+
 }
 
 #info-list {
