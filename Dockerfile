@@ -10,7 +10,7 @@ RUN cargo build --release
 # Build web app with own code
 RUN rm src/*.rs
 ADD . ./
-RUN rm ./target/release/deps/meta-tune*
+RUN rm ./target/release/deps/meta_tune*
 RUN cargo build --release
 
 
@@ -30,7 +30,7 @@ RUN groupadd $APP_USER \
     && useradd -g $APP_USER $APP_USER \
     && mkdir -p ${APP}
 
-COPY --from=builder /meta-tune/target/release/axum-demo ${APP}/axum-demo
+COPY --from=builder /meta-tune/target/release/meta-tune ${APP}/meta-tune
 COPY --from=builder /meta-tune/static ${APP}/static
 
 RUN chown -R $APP_USER:$APP_USER ${APP}

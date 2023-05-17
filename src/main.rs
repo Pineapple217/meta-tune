@@ -25,7 +25,7 @@ async fn main() {
     let env = Env::default().filter_or("LOG_LEVEL", "warn");
     env_logger::init_from_env(env);
 
-    let creds = Credentials::from_env().unwrap();
+    let creds = Credentials::from_env().expect("Spotify credentials");
     let conf = Config {
         token_refreshing: true,
         ..Default::default()
