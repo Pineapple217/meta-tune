@@ -42,7 +42,7 @@ async fn main() {
         .route("/api/track/:id", get(handlers::get_track))
         .with_state(app_state.clone());
 
-    let server = Server::bind(&"0.0.0.0:8080".parse().unwrap()).serve(router.into_make_service());
+    let server = Server::bind(&"0.0.0.0:3000".parse().unwrap()).serve(router.into_make_service());
     let addr = server.local_addr();
     info!("Listening on {addr}");
 

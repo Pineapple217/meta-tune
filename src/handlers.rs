@@ -11,13 +11,15 @@ use rspotify::{model::TrackId, prelude::*};
 use crate::models::{AppState, TrackSend};
 
 pub async fn root_get() -> impl IntoResponse {
-    let markup = tokio::fs::read_to_string("src/index.html").await.unwrap();
+    let markup = tokio::fs::read_to_string("static/index.html")
+        .await
+        .unwrap();
 
     Html(markup)
 }
 
 pub async fn indexmjs_get() -> impl IntoResponse {
-    let markup = tokio::fs::read_to_string("src/index.js").await.unwrap();
+    let markup = tokio::fs::read_to_string("static/index.js").await.unwrap();
 
     Response::builder()
         .header("content-type", "application/javascript;charset=utf-8")
@@ -26,7 +28,7 @@ pub async fn indexmjs_get() -> impl IntoResponse {
 }
 
 pub async fn indexcss_get() -> impl IntoResponse {
-    let markup = tokio::fs::read_to_string("src/index.css").await.unwrap();
+    let markup = tokio::fs::read_to_string("static/index.css").await.unwrap();
 
     Response::builder()
         .header("content-type", "text/css;charset=utf-8")
