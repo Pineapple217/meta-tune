@@ -39,7 +39,14 @@
                 open_in_new
               </a>
             </div>
-            <h1>{{ track.name }}</h1>
+            <h1>
+              {{ track.name }}<span
+                v-if="track.explicit === true"
+                class="material-symbols-outlined explicit"
+                title="Explicit">
+                explicit
+              </span>
+            </h1>
             <h3>{{ track.artists.join(', ') }}</h3>
           </hgroup>
           <div id="info-list">

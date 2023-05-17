@@ -62,6 +62,9 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
             .collect(),
         duration: track.duration.num_seconds() as i32,
         popularity: track.popularity,
+        explicit: track.explicit,
+        url: track.external_urls.get("spotify").cloned(),
+        preview_url: track.preview_url,
         genres: artists
             .into_iter()
             .map(|art| art.genres)

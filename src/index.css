@@ -1,7 +1,6 @@
 :root {
   --color: #f4f4f5;
   --bg-color: #131314;
-
 }
 
 blockquote,
@@ -156,7 +155,6 @@ body {
 .progress {
   width: 100%;
   height: 0.85rem;
-
 }
 
 .progress-wrap {
@@ -165,7 +163,6 @@ body {
   position: relative;
   border-radius: 1000px;
   border: solid var(--color) 1px;
-
 }
 
 .progress-bar {
@@ -176,4 +173,11 @@ body {
   top: 0;
   border-radius: -1000px;
   transition: all 0.3s;
+}
+
+.explicit {
+  vertical-align: bottom;
+  margin-left: 5px;
+  margin-bottom: 0.15em;
+  font-size: 1.2rem;
 }
