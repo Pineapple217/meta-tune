@@ -1,4 +1,7 @@
-use rspotify::{model::Image, ClientCredsSpotify};
+use rspotify::{
+    model::{AudioFeatures, Image},
+    ClientCredsSpotify,
+};
 use serde::Serialize;
 
 #[derive(Clone)]
@@ -16,4 +19,5 @@ pub struct TrackSend {
     pub preview_url: Option<String>,
     pub genres: Vec<String>,
     pub images: Vec<Image>,
+    pub audio_features: AudioFeatures,
 }

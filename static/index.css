@@ -86,6 +86,11 @@ body {
   text-align: center;
 }
 
+a {
+  font-weight: inherit;
+  color: inherit;
+}
+
 #header h2 {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -93,9 +98,11 @@ body {
 }
 
 #search {
-  padding: 2rem 0rem;
+  --padding: 20px;
+  padding: 2rem 0;
+  margin: 0 var(--padding);
   max-width: 56rem;
-  width: 100%;
+  width: calc(100% - var(--padding));
 }
 
 #search input {
@@ -148,9 +155,11 @@ body {
 }
 
 #info-list {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 180px 1fr;
+  /* grid-template-columns: repeat(2, minmax(0, 1fr)); */
   display: grid;
   margin: 1rem;
+  /* grid-template-columns: 200px auto; */
 }
 
 .progress {

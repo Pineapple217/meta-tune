@@ -40,7 +40,8 @@
               </a>
             </div>
             <h1>
-              {{ track.name }}<span
+              <a :href="track.url" target="_blank">{{ track.name }}</a
+              ><span
                 v-if="track.explicit === true"
                 class="material-symbols-outlined explicit"
                 title="Explicit">
@@ -67,6 +68,71 @@
 
             <p v-if="track.genres.length > 0">Genre(s)</p>
             <p v-if="track.genres.length > 0">{{ track.genres.join(', ') }}</p>
+
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+            <p>Acousticness</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.acousticness*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.acousticness*100) + '%'}"></div>
+            </div>
+
+            <p>Danceability</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.danceability*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.danceability*100) + '%'}"></div>
+            </div>
+
+            <p>Energy</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.energy*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.energy*100) + '%'}"></div>
+            </div>
+
+            <p>Instrumentalness</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.instrumentalness*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.instrumentalness*100) + '%'}"></div>
+            </div>
+
+            <p>Liveness</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.liveness*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.liveness*100) + '%'}"></div>
+            </div>
+
+            <p>Speechiness</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.speechiness*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.speechiness*100) + '%'}"></div>
+            </div>
+
+            <p>Valence</p>
+            <div
+              class="progress-wrap progress"
+              :title="track.audio_features.valence*100 + '/100'">
+              <div
+                class="progress-bar progress"
+                :style="{left: '-' + (100 - track.audio_features.valence*100) + '%'}"></div>
+            </div>
           </div>
         </div>
       </div>
