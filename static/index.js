@@ -12,7 +12,7 @@ https://github.com/Pineapple217/meta-tune
 import { createApp } from "https://unpkg.com/petite-vue@0.2.2/dist/petite-vue.es.js";
 
 createApp({
-  track_identifier: "0rZjIUqYHZeXKC1nRwYX26",
+  track_identifier: "",
   track: null,
 
   async getTrack(e) {
@@ -25,6 +25,10 @@ createApp({
       this.track = track_json;
       console.log(track_json);
     } catch (err) {}
+  },
+  floatToPer(f) {
+    let x = f * 100;
+    return x.toFixed(2);
   },
 }).mount();
 

@@ -2,3 +2,4 @@
 
 - small bug add the rounding of the popbar
 - loading animation
+- fixt logs

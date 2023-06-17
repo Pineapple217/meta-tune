@@ -19,12 +19,12 @@
     <div id="main">
       <hgroup id="header">
         <h1>Meta-Tune</h1>
-        <h2>Getting the data that Spotify doesn't want you to know</h2>
+        <h2>Getting all the metadata</h2>
       </hgroup>
       <div v-scope id="search">
         <input
           type="search"
-          placeholder="Enter id"
+          placeholder="Enter id or url"
           v-on:keyup.enter="getTrack"
           v-model="track_identifier" />
 
@@ -74,7 +74,7 @@
             <p>Acousticness</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.acousticness*100 + '/100'">
+              :title="floatToPer(track.audio_features.acousticness) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.acousticness*100) + '%'}"></div>
@@ -83,7 +83,7 @@
             <p>Danceability</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.danceability*100 + '/100'">
+              :title="floatToPer(track.audio_features.danceability) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.danceability*100) + '%'}"></div>
@@ -92,7 +92,7 @@
             <p>Energy</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.energy*100 + '/100'">
+              :title="floatToPer(track.audio_features.energy) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.energy*100) + '%'}"></div>
@@ -101,7 +101,7 @@
             <p>Instrumentalness</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.instrumentalness*100 + '/100'">
+              :title="floatToPer(track.audio_features.instrumentalness) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.instrumentalness*100) + '%'}"></div>
@@ -110,7 +110,7 @@
             <p>Liveness</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.liveness*100 + '/100'">
+              :title="floatToPer(track.audio_features.liveness) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.liveness*100) + '%'}"></div>
@@ -119,7 +119,7 @@
             <p>Speechiness</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.speechiness*100 + '/100'">
+              :title="floatToPer(track.audio_features.speechiness) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.speechiness*100) + '%'}"></div>
@@ -128,7 +128,7 @@
             <p>Valence</p>
             <div
               class="progress-wrap progress"
-              :title="track.audio_features.valence*100 + '/100'">
+              :title="floatToPer(track.audio_features.valence) + '/100'">
               <div
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.valence*100) + '%'}"></div>
