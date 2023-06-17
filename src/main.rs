@@ -1,10 +1,8 @@
 mod handlers;
 mod models;
 
-#[cfg(debug_assertions)]
-use dotenv::dotenv;
-
 use axum::{routing::get, Router, Server};
+use dotenv::dotenv;
 use env_logger::Env;
 use log::info;
 // use log::{debug, error, info, trace, warn};
@@ -19,7 +17,6 @@ use models::AppState;
 
 #[tokio::main]
 async fn main() {
-    #[cfg(debug_assertions)]
     dotenv().ok();
 
     let env = Env::default().filter_or("LOG_LEVEL", "warn");
