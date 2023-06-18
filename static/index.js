@@ -13,6 +13,7 @@ import { createApp } from "https://unpkg.com/petite-vue@0.2.2/dist/petite-vue.es
 
 createApp({
   track_identifier: "",
+  loading: false,
   track: null,
 
   async getTrack(e) {
@@ -20,8 +21,10 @@ createApp({
     const track_id = extractTrackId(this.track_identifier);
     if (!track_id) return;
     try {
+      this.loading = true;
       let respone = await fetch(`./api/track/${track_id}`);
       let track_json = await respone.json();
+      this.loading = false;
       this.track = track_json;
       console.log(track_json);
     } catch (err) {}

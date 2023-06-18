@@ -28,7 +28,8 @@
           v-on:keyup.enter="getTrack"
           v-model="track_identifier" />
 
-        <div v-if="track !== null" id="track-info">
+        <div class="lds-dual-ring" v-show="loading"></div>
+        <div v-if="track !== null && !loading" id="track-info">
           <hgroup>
             <div class="cover-art">
               <img :src="track.images[1].url" alt="cover art" />
