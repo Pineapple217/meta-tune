@@ -1,5 +1,4 @@
 # Todo
 
-- small bug add the rounding of the popbar
-- loading animation
+- small bug at the rounding of the bar
 - dotenv not linux???
