@@ -21,7 +21,7 @@
         <h1>Meta-Tune</h1>
         <h2>Getting all the metadata</h2>
       </hgroup>
-      <div v-scope id="search">
+      <div v-scope id="search" @mounted="mounted">
         <input
           type="search"
           placeholder="Enter id or url"

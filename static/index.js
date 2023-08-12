@@ -17,7 +17,7 @@ const app = createApp({
   track: null,
 
   async getTrack(e) {
-    e.target.blur(); // hide keyboard for mobile
+    if (e) e.target.blur(); // hide keyboard for mobile
     const track_id = extractTrackId(this.track_identifier);
     if (!track_id) return;
     try {
@@ -27,6 +27,9 @@ const app = createApp({
       this.loading = false;
       this.track = track_json;
       console.log(track_json);
+      const url = new URL(window.location.href);
+      url.searchParams.set("track_id", track_id);
+      window.history.pushState({}, "", url.toString());
     } catch (err) {}
   },
   intToPitch(integer) {
@@ -50,6 +53,12 @@ const app = createApp({
     } else {
       return "Invalid pitch class";
     }
+  },
+  mounted() {
+    const url = new URL(window.location.href);
+    const track_id = url.searchParams.get("track_id");
+    this.track_identifier = track_id;
+    this.getTrack();
   },
   floatToPer(f) {
     let x = f * 100;
