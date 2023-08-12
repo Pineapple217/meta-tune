@@ -134,6 +134,25 @@
                 class="progress-bar progress"
                 :style="{left: '-' + (100 - track.audio_features.valence*100) + '%'}"></div>
             </div>
+            <p>&nbsp</p>
+            <p>&nbsp</p>
+
+            <p>Loudness</p>
+            <p>{{ track.audio_features.loudness }} dB</p>
+
+            <p>Tempo</p>
+            <p>{{ Math.round(track.audio_features.tempo) }} BPM</p>
+
+            <p v-if="track.audio_features.key !== -1">Key</p>
+            <p v-if="track.audio_features.key !== -1">
+              {{ intToPitch(track.audio_features.key) }}
+            </p>
+
+            <p>Mode</p>
+            <p>{{ track.audio_features.mode == 1?"Major":"Minor" }}</p>
+
+            <p>Time Signature</p>
+            <p>{{ track.audio_features.time_signature }}/4</p>
           </div>
         </div>
       </div>

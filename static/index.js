@@ -11,7 +11,7 @@ https://github.com/Pineapple217/meta-tune
 `);
 import { createApp } from "https://unpkg.com/petite-vue@0.2.2/dist/petite-vue.es.js";
 
-createApp({
+const app = createApp({
   track_identifier: "",
   loading: false,
   track: null,
@@ -28,6 +28,28 @@ createApp({
       this.track = track_json;
       console.log(track_json);
     } catch (err) {}
+  },
+  intToPitch(integer) {
+    const pitchClassSymbols = [
+      "C",
+      "C♯/D♭",
+      "D",
+      "D♯/E♭",
+      "E",
+      "F",
+      "F♯/G♭",
+      "G",
+      "G♯/A♭",
+      "A",
+      "A♯/B♭",
+      "B",
+    ];
+
+    if (integer >= 0 && integer <= 11) {
+      return pitchClassSymbols[integer];
+    } else {
+      return "Invalid pitch class";
+    }
   },
   floatToPer(f) {
     let x = f * 100;
