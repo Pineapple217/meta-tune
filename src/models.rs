@@ -13,6 +13,7 @@ pub struct TrackSend {
     pub name: String,
     pub artists: Vec<String>,
     pub duration: i32,
+    pub release_date: Option<String>,
     pub popularity: u32,
     pub explicit: bool,
     pub url: Option<String>,

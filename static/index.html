@@ -58,6 +58,9 @@
               String(track.duration%60).padStart(2, '0') }}
             </p>
 
+            <p v-if="track.release_date">Release date</p>
+            <p v-if="track.release_date">{{ track.release_date }}</p>
+
             <p>Popularity</p>
             <div
               class="progress-wrap progress"
@@ -151,7 +154,7 @@
             <p>Mode</p>
             <p>{{ track.audio_features.mode == 1?"Major":"Minor" }}</p>
 
-            <p>Time Signature</p>
+            <p>Time signature</p>
             <p>{{ track.audio_features.time_signature }}/4</p>
           </div>
         </div>
