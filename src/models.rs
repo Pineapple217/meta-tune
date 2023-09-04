@@ -7,6 +7,7 @@ use serde::Serialize;
 #[derive(Clone)]
 pub struct AppState {
     pub spotify: ClientCredsSpotify,
+    pub analytics_script: String,
 }
 #[derive(Serialize)]
 pub struct TrackSend {

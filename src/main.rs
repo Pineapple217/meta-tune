@@ -40,10 +40,15 @@ async fn main() {
         token_refreshing: true,
         ..Default::default()
     };
+    let analytics_script = std::env::var("ANALYTICS_SCRIPT").unwrap_or("".to_string());
+    info!("analytics_script: {analytics_script}");
     let spotify = ClientCredsSpotify::with_config(creds, conf);
     spotify.request_token().await.unwrap();
 
-    let app_state = AppState { spotify: spotify };
+    let app_state = AppState {
+        spotify: spotify,
+        analytics_script: analytics_script,
+    };
 
     let router = Router::new()
         .route("/", get(handlers::root_get))

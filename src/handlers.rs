@@ -10,10 +10,11 @@ use rspotify::{model::TrackId, prelude::*};
 
 use crate::models::{AppState, TrackSend};
 
-pub async fn root_get() -> impl IntoResponse {
+pub async fn root_get(State(app_state): State<AppState>) -> impl IntoResponse {
     let markup = tokio::fs::read_to_string("static/index.html")
         .await
-        .unwrap();
+        .unwrap()
+        .replace("{{ analytics }}", &app_state.analytics_script);
 
     Html(markup)
 }
