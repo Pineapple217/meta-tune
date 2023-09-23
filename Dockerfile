@@ -14,7 +14,7 @@ RUN rm ./target/release/deps/meta_tune*
 RUN cargo build --release
 
 
-FROM debian:buster-slim
+FROM debian:bullseye
 ARG APP=/usr/src/app
 
 RUN apt-get update \
