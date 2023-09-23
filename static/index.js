@@ -18,6 +18,15 @@ const app = createApp({
 
   async getTrack(e) {
     if (e) e.target.blur(); // hide keyboard for mobile
+    const link_id = extractSpotifylinkId(this.track_identifier);
+    if (link_id) {
+      this.loading = true;
+      try {
+        let respone = await fetch(`./api/spotifylink/${link_id}`);
+        let url = await respone.json();
+        this.track_identifier = url;
+      } catch (err) {}
+    }
     const track_id = extractTrackId(this.track_identifier);
     if (!track_id) return;
     try {
@@ -81,6 +90,17 @@ function extractTrackId(urlOrId) {
 
   if (urlOrId.length === 22) {
     return urlOrId;
+  } else {
+    return null;
+  }
+}
+
+function extractSpotifylinkId(url) {
+  const regex = /^https:\/\/spotify\.link\/([A-Za-z0-9]+)$/;
+  const match = url.match(regex);
+
+  if (match && match[1]) {
+    return match[1];
   } else {
     return null;
   }

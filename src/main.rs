@@ -55,6 +55,7 @@ async fn main() {
         .route("/index.js", get(handlers::indexmjs_get))
         .route("/index.css", get(handlers::indexcss_get))
         .route("/api/track/:id", get(handlers::get_track))
+        .route("/api/spotifylink/:id", get(handlers::get_link))
         .layer(
             TraceLayer::new_for_http()
                 .make_span_with(
