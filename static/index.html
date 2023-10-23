@@ -26,7 +26,8 @@
           type="search"
           placeholder="Enter id or url"
           v-on:keyup.enter="getTrack"
-          v-model="track_identifier" />
+          v-model="track_identifier"
+          autofocus />
 
         <div class="lds-dual-ring" v-show="loading"></div>
         <div v-if="track !== null && !loading" id="track-info">
