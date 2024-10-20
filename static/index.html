@@ -1,166 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap"
-      rel="stylesheet" />
-    <link
-      rel="stylesheet"
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap" rel="stylesheet" />
+    <link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link type="text/css" rel="stylesheet" href="/index.css" />
     <title>Meta-Tune</title>
     <script type="module" src="/index.js"></script>
+    <script src="https://unpkg.com/mithril/mithril.js"></script>
   </head>
 
   <body>
-    <div id="main">
-      <hgroup id="header">
-        <h1>Meta-Tune</h1>
-        <h2>Getting all the metadata</h2>
-      </hgroup>
-      <div v-scope id="search" @mounted="mounted">
-        <input
-          type="search"
-          placeholder="Enter id or url"
-          v-on:keyup.enter="getTrack"
-          v-model="track_identifier"
-          autofocus />
-
-        <div class="lds-dual-ring" v-show="loading"></div>
-        <div v-if="track !== null && !loading" id="track-info">
-          <hgroup>
-            <div class="cover-art">
-              <img :src="track.images[1].url" alt="cover art" />
-              <a
-                :href="track.images[0].url"
-                target="_blank"
-                class="material-symbols-outlined">
-                open_in_new
-              </a>
-            </div>
-            <h1>
-              <a :href="track.url" target="_blank">{{ track.name }}</a
-              ><span
-                v-if="track.explicit === true"
-                class="material-symbols-outlined explicit"
-                title="Explicit">
-                explicit
-              </span>
-            </h1>
-            <h3>{{ track.artists.join(', ') }}</h3>
-          </hgroup>
-          <div id="info-list">
-            <p>Duration</p>
-            <p>
-              {{ track.duration/60>>0 }}:{{
-              String(track.duration%60).padStart(2, '0') }}
-            </p>
-
-            <p v-if="track.release_date">Release date</p>
-            <p v-if="track.release_date">{{ track.release_date }}</p>
-
-            <p>Popularity</p>
-            <div
-              class="progress-wrap progress"
-              :title="track.popularity + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.popularity) + '%'}"></div>
-            </div>
-
-            <p v-if="track.genres.length > 0">Genre(s)</p>
-            <p v-if="track.genres.length > 0">{{ track.genres.join(', ') }}</p>
-
-            <p>&nbsp</p>
-            <p>&nbsp</p>
-            <p>Acousticness</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.acousticness) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.acousticness*100) + '%'}"></div>
-            </div>
-
-            <p>Danceability</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.danceability) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.danceability*100) + '%'}"></div>
-            </div>
-
-            <p>Energy</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.energy) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.energy*100) + '%'}"></div>
-            </div>
-
-            <p>Instrumentalness</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.instrumentalness) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.instrumentalness*100) + '%'}"></div>
-            </div>
-
-            <p>Liveness</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.liveness) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.liveness*100) + '%'}"></div>
-            </div>
-
-            <p>Speechiness</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.speechiness) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.speechiness*100) + '%'}"></div>
-            </div>
-
-            <p>Valence</p>
-            <div
-              class="progress-wrap progress"
-              :title="floatToPer(track.audio_features.valence) + '/100'">
-              <div
-                class="progress-bar progress"
-                :style="{left: '-' + (100 - track.audio_features.valence*100) + '%'}"></div>
-            </div>
-            <p>&nbsp</p>
-            <p>&nbsp</p>
-
-            <p>Loudness</p>
-            <p>{{ track.audio_features.loudness }} dB</p>
-
-            <p>Tempo</p>
-            <p>{{ Math.round(track.audio_features.tempo) }} BPM</p>
-
-            <p v-if="track.audio_features.key !== -1">Key</p>
-            <p v-if="track.audio_features.key !== -1">
-              {{ intToPitch(track.audio_features.key) }}
-            </p>
-
-            <p>Mode</p>
-            <p>{{ track.audio_features.mode == 1?"Major":"Minor" }}</p>
-
-            <p>Time signature</p>
-            <p>{{ track.audio_features.time_signature }}/4</p>
-          </div>
-        </div>
-      </div>
-    </div>
   </body>
   {{ analytics }}
+
 </html>
