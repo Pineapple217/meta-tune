@@ -71,7 +71,7 @@ pub async fn get_track(Path(id): Path<String>, State(app_state): State<AppState>
     let Ok(track_id) = TrackId::from_id(&id) else {
         return StatusCode::BAD_REQUEST.into_response();
     };
-    let Ok(track) = spotify.track(track_id.clone_static()).await else {
+    let Ok(track) = spotify.track(track_id.clone_static(), None).await else {
         return StatusCode::NOT_FOUND.into_response();
     };
     let Ok(track_features) = spotify.track_features(track_id).await else {
