@@ -1,5 +1,5 @@
 # Build Stage
-FROM rust:1.68.0 as builder
+FROM rust:1.78.0 as builder
 
 RUN USER=root cargo new --bin meta-tune
 WORKDIR ./meta-tune
@@ -14,8 +14,14 @@ RUN rm ./target/release/deps/meta_tune*
 RUN cargo build --release
 
 
-FROM debian:bullseye
+FROM debian:bookworm
 ARG APP=/usr/src/app
+
+RUN apt-get update && apt install -y openssl
+
+ARG GIT_COMMIT=unspecified
+LABEL org.opencontainers.image.version=$GIT_COMMIT
+LABEL org.opencontainers.image.source=https://github.com/Pineapple217/meta-tune
 
 RUN apt-get update \
     && apt-get install -y ca-certificates tzdata \

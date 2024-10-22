@@ -7,8 +7,7 @@ networks:
 
 services:
   metatune:
-    build:
-      context: .
+    image: ghcr.io/pineapple217/meta-tune:latest
     container_name: meta-tune
     restart: unless-stopped
     environment:
