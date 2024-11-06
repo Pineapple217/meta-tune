@@ -64,34 +64,49 @@ m.mount(root, {
           : track != null
           ? m("div", { id: "track-info" }, [
               m("hgroup", [
-                m("div", { class: "cover-art" }, [
-                  m("img", { alt: "cover art", src: track.images[1].url }),
+                m("div", [
+                  m("div", { class: "cover-art" }, [
+                    m(
+                      "a",
+                      {
+                        target: "_blank",
+                        href: track.images[0].url,
+                      },
+                      m("img", {
+                        alt: "cover art",
+                        src: track.images[1].url,
+                        width: 300,
+                        height: 300,
+                      })
+                    ),
+                  ]),
                   m(
-                    "a",
+                    "audio",
                     {
-                      class: "material-symbols-outlined",
-                      target: "_blank",
-                      href: track.images[0].url,
-                      width: 300,
-                      height: 300,
+                      controls: true,
+                      preload: "auto",
+                      controlslist: "noplaybackrate nodownload",
+                      volume: "0.3",
                     },
-                    "open_in_new"
+                    m("source", { src: track.preview_url, type: "audio/mpeg" })
                   ),
                 ]),
-                m("h1", [
-                  m("a", { href: track.url, target: "_blank" }, track.name),
-                  track.explicit
-                    ? m(
-                        "span",
-                        {
-                          class: "material-symbols-outlined explicit",
-                          title: "Explicit",
-                        },
-                        "explicit"
-                      )
-                    : null,
+                m("div", { id: "titles" }, [
+                  m("h1", [
+                    m("a", { href: track.url, target: "_blank" }, track.name),
+                    track.explicit
+                      ? m(
+                          "span",
+                          {
+                            class: "material-symbols-outlined explicit",
+                            title: "Explicit",
+                          },
+                          "explicit"
+                        )
+                      : null,
+                  ]),
+                  m("h3", track.artists.join(", ")),
                 ]),
-                m("h3", track.artists.join(", ")),
               ]),
               m("div", { id: "info-list" }, [
                 m("p", "Duration"),
