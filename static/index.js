@@ -123,48 +123,66 @@ m.mount(root, {
                   : null,
                 m("p", m.trust("&nbsp")),
                 m("p", m.trust("&nbsp")),
-                m("p", "Acousticness"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.acousticness),
-                }),
-                m("p", "Danceability"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.danceability),
-                }),
-                m("p", "Energy"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.energy),
-                }),
-                m("p", "Instrumentalness"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.instrumentalness),
-                }),
-                m("p", "Liveness"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.liveness),
-                }),
-                m("p", "Speechiness"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.speechiness),
-                }),
-                m("p", "Valence"),
-                m(progressBar, {
-                  progress: floatToPer(track.audio_features.valence),
-                }),
-                m("p", m.trust("&nbsp")),
-                m("p", m.trust("&nbsp")),
-                m("p", "Loudness"),
-                m("p", track.audio_features.loudness, " dB"),
-                m("p", "Tempo"),
-                m("p", Math.round(track.audio_features.tempo), " BPM"),
-                track.audio_features.key !== -1 ? m("p", "Key") : null,
-                track.audio_features.key !== -1
-                  ? m("p", intToPitch(track.audio_features.key))
-                  : null,
-                m("p", "Mode"),
-                m("p", track.audio_features.mode == 1 ? "Major" : "Minor"),
-                m("p", "Time signature"),
-                m("p", track.audio_features.time_signature, "/4"),
+                m(
+                  "div",
+                  track.audio_features
+                    ? [
+                        m("p", "Acousticness"),
+                        m(progressBar, {
+                          progress: floatToPer(
+                            track.audio_features.acousticness
+                          ),
+                        }),
+                        m("p", "Danceability"),
+                        m(progressBar, {
+                          progress: floatToPer(
+                            track.audio_features.danceability
+                          ),
+                        }),
+                        m("p", "Energy"),
+                        m(progressBar, {
+                          progress: floatToPer(track.audio_features.energy),
+                        }),
+                        m("p", "Instrumentalness"),
+                        m(progressBar, {
+                          progress: floatToPer(
+                            track.audio_features.instrumentalness
+                          ),
+                        }),
+                        m("p", "Liveness"),
+                        m(progressBar, {
+                          progress: floatToPer(track.audio_features.liveness),
+                        }),
+                        m("p", "Speechiness"),
+                        m(progressBar, {
+                          progress: floatToPer(
+                            track.audio_features.speechiness
+                          ),
+                        }),
+                        m("p", "Valence"),
+                        m(progressBar, {
+                          progress: floatToPer(track.audio_features.valence),
+                        }),
+                        m("p", m.trust("&nbsp")),
+                        m("p", m.trust("&nbsp")),
+                        m("p", "Loudness"),
+                        m("p", track.audio_features.loudness, " dB"),
+                        m("p", "Tempo"),
+                        m("p", Math.round(track.audio_features.tempo), " BPM"),
+                        track.audio_features.key !== -1 ? m("p", "Key") : null,
+                        track.audio_features.key !== -1
+                          ? m("p", intToPitch(track.audio_features.key))
+                          : null,
+                        m("p", "Mode"),
+                        m(
+                          "p",
+                          track.audio_features.mode == 1 ? "Major" : "Minor"
+                        ),
+                        m("p", "Time signature"),
+                        m("p", track.audio_features.time_signature, "/4"),
+                      ]
+                    : null
+                ),
               ]),
             ])
           : null,

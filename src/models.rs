@@ -21,5 +21,5 @@ pub struct TrackSend {
     pub preview_url: Option<String>,
     pub genres: Vec<String>,
     pub images: Vec<Image>,
-    pub audio_features: AudioFeatures,
+    pub audio_features: Option<AudioFeatures>,
 }
